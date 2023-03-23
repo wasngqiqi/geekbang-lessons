@@ -18,6 +18,7 @@ package org.geekbang.thinking.in.spring.ioc.overview.dependency.lookup;
 
 import org.geekbang.thinking.in.spring.ioc.overview.annotation.Super;
 import org.geekbang.thinking.in.spring.ioc.overview.domain.User;
+import org.geekbang.thinking.in.spring.ioc.overview.domain.UserFactoryBean;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
@@ -34,19 +35,21 @@ import java.util.Map;
  */
 public class DependencyLookupDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         // 配置 XML 配置文件
         // 启动 Spring 应用上下文
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-lookup-context.xml");
         // 按照类型查找
-        lookupByType(beanFactory);
+//        lookupByType(beanFactory);
         // 按照类型查找结合对象
-        lookupCollectionByType(beanFactory);
+//        lookupCollectionByType(beanFactory);
         // 通过注解查找对象
-        lookupByAnnotationType(beanFactory);
+//        lookupByAnnotationType(beanFactory);
 
 //        lookupInRealTime(beanFactory);
 //        lookupInLazy(beanFactory);
+//        equals1(beanFactory);
+        equals2(beanFactory);
     }
 
     private static void lookupByAnnotationType(BeanFactory beanFactory) {
@@ -79,5 +82,25 @@ public class DependencyLookupDemo {
     private static void lookupInRealTime(BeanFactory beanFactory) {
         User user = (User) beanFactory.getBean("user");
         System.out.println("实时查找：" + user);
+    }
+
+
+    private static void equals1(BeanFactory beanFactory) {
+        ObjectFactory<User> objectFactory = (ObjectFactory<User>) beanFactory.getBean("objectFactory");
+        User user1 = objectFactory.getObject();
+
+        User user2 = (User) beanFactory.getBean("user");
+        System.out.println(user1 == user2);
+
+    }
+
+    private static void equals2(BeanFactory beanFactory) throws Exception {
+
+        UserFactoryBean userFactoryBean = (UserFactoryBean) beanFactory.getBean("&userFactoryBean");
+        User user1 = userFactoryBean.getObject();
+
+        User user2 = (User) beanFactory.getBean("user");
+        System.out.println(user1 == user2);
+
     }
 }
