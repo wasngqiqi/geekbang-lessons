@@ -18,6 +18,7 @@ package org.geekbang.thinking.in.spring.ioc.overview.domain;
 
 import org.geekbang.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.core.io.Resource;
 
 import javax.annotation.PostConstruct;

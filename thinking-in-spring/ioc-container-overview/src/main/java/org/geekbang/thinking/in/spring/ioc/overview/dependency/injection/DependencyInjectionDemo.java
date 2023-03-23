@@ -43,20 +43,22 @@ public class DependencyInjectionDemo {
 
 //        System.out.println(userRepository.getUsers());
 
-        // 依赖来源二：依赖注入（內建依赖）
-        System.out.println(userRepository.getBeanFactory());
+        // 依赖来源二：依赖注入（內建依赖）autowire="byType" 属性
+//        System.out.println(userRepository.getBeanFactory());
 
 
         ObjectFactory userFactory = userRepository.getObjectFactory();
 
-        System.out.println(userFactory.getObject() == applicationContext);
+//        System.out.println(userFactory.getObject() == applicationContext);
 
-        // 依赖查找（错误）
+//         依赖查找（错误）
 //        System.out.println(beanFactory.getBean(BeanFactory.class));
 
-        // 依赖来源三：容器內建 Bean
+        // 依赖来源三：容器內建 Bean（自动注入到context）
         Environment environment = applicationContext.getBean(Environment.class);
-        System.out.println("获取 Environment 类型的 Bean：" + environment);
+//        System.out.println("获取 Environment 类型的 Bean：" + environment);
+
+        whoIsIoCContainer(userRepository, applicationContext);
     }
 
     private static void whoIsIoCContainer(UserRepository userRepository, ApplicationContext applicationContext) {
@@ -66,8 +68,9 @@ public class DependencyInjectionDemo {
 
         // ConfigurableApplicationContext#getBeanFactory()
 
-
-        // 这个表达式为什么不会成立
+        System.out.println(userRepository.getBeanFactory());
+//        System.out.println(applicationContext.getBean(BeanFactory.class));
+//         这个表达式为什么不会成立
         System.out.println(userRepository.getBeanFactory() == applicationContext);
 
         // ApplicationContext is BeanFactory
