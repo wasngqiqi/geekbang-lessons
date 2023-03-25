@@ -23,6 +23,7 @@ import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -38,20 +39,22 @@ import static org.springframework.beans.factory.support.BeanDefinitionBuilder.ge
  * @since
  */
 // 3. 通过 @Import 来进行导入
-@Import(AnnotationBeanDefinitionDemo.Config.class)
+//@Import(AnnotationBeanDefinitionDemo.Config.class)
+//@Configuration
 public class AnnotationBeanDefinitionDemo {
 
     public static void main(String[] args) {
         // 创建 BeanFactory 容器
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         // 注册 Configuration Class（配置类）
-        applicationContext.register(AnnotationBeanDefinitionDemo.class);
+        applicationContext.register(AnnotationBeanDefinitionDemo.Config.class);
+//        applicationContext.register(AnnotationBeanDefinitionDemo.class);
 
         // 通过 BeanDefinition 注册 API 实现
         // 1.命名 Bean 的注册方式
-        registerUserBeanDefinition(applicationContext, "mercyblitz-user");
+//        registerUserBeanDefinition(applicationContext, "mercyblitz-user");
         // 2. 非命名 Bean 的注册方法
-        registerUserBeanDefinition(applicationContext);
+//        registerUserBeanDefinition(applicationContext);
 
         // 启动 Spring 应用上下文
         applicationContext.refresh();
@@ -84,6 +87,7 @@ public class AnnotationBeanDefinitionDemo {
 
     // 2. 通过 @Component 方式
     @Component // 定义当前类作为 Spring Bean（组件）
+//    @Configuration
     public static class Config {
 
         // 1. 通过 @Bean 方式定义

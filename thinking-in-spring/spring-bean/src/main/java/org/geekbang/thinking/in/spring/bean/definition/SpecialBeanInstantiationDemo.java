@@ -46,9 +46,9 @@ public class SpecialBeanInstantiationDemo {
 
         ServiceLoader<UserFactory> serviceLoader = beanFactory.getBean("userFactoryServiceLoader", ServiceLoader.class);
 
-        displayServiceLoader(serviceLoader);
+//        displayServiceLoader(serviceLoader);
 
-//        demoServiceLoader();
+        demoServiceLoader();
 
         // 创建 UserFactory 对象，通过 AutowireCapableBeanFactory
         UserFactory userFactory = beanFactory.createBean(DefaultUserFactory.class);
